@@ -512,3 +512,39 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     } 
   }) 
   }); 
+
+
+
+
+
+
+client.on("message", message => {
+  if(message.content.startsWith(prefix + "banner")) {
+    if(message.guild.bannerURL === null || message.guild.bannerURL === undefined) return message.channel.send("his server doesn't have a banner.");
+    const ba = new Discord.RichEmbed()
+    .setAuthor(message.guild.name, message.guild.iconURL)
+    .setDescription(`[Banner URL](${message.guild.bannerURL}?size=2048)`)
+    .setImage(message.guild.bannerURL + "?size=2048")
+    message.channel.send({embed : ba})
+  }
+});
+
+
+client.on('message', message => {
+    const swearWords = ["كس امك", "كسختك","كسمك"]; // الكلمات الممنوعه هنا
+    if( swearWords.some(word => message.content.includes(word)) ) {
+        message.delete();
+       
+      }
+})
+
+
+client.on("ready", () => { // by boyka#9979
+  const channel = client.channels.get("733913331194396742");
+  if (!channel) return console.error("The channel does not exist!");
+  channel.join().then(connection => {
+    console.log("Successfully connected.");
+  }).catch(e => { // by boyka#9979
+    console.error(e);
+  });
+});
