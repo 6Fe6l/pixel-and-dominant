@@ -154,3 +154,99 @@ client.on("message", async message => {
       )
     }
 });
+
+
+
+client.on("message", message => {
+  if (message.content === prefix + "bots") {
+    var list_all = [];
+    message.guild.members.forEach(bb => {
+      if (!bb.user.bot) return;
+      list_all.push(`<@${bb.user.id}>`);
+    });
+    message.channel.send(list_all.join(", "));
+  }
+});
+
+client.on ("message", async (Message) => {
+    if (!Message.guild ||
+        Message.author.bot) return false;
+     if (Message.content.startsWith (prefix + "check")) {
+        if (!Message.member.hasPermission ("MANAGE_ROLES"))return Message.reply("**You dont have Permissions.**")//مادري ليش هل برمشن بس احسن 
+        var role = Message.mentions.roles.first ();
+        if (!role) return Message.reply ("**mention the role.**");
+
+        var members = Message.guild.members.filter (m => m.roles.get (role.id));
+        if (members.size == 0) return Message.reply ("**There are 0 members have this role.**");
+        var embed = new Discord.RichEmbed ()
+        .setColor ("BLACK")
+        .setTitle (`We have ${members.size} Members have this role on this server`)
+        .setDescription (`${members.map(m => "<@"+m.user.id+">").join("\n")}`)
+        .setFooter (`Requested By: ${Message.author.tag}`, Message.author.avatarURL)
+
+        Message.channel.send (embed);
+    } 
+})
+
+
+
+client.on('message', message => { 
+           if (message.content.startsWith(prefix + "id")) {
+     var args = message.content.split(" ").slice(1);
+     let user = message.mentions.users.first();
+     var men = message.mentions.users.first();
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+      .setAuthor(message.author.username, message.author.avatarURL) 
+    .setColor("#707070")
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true) 
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)               
+    .setFooter(`Probot`, 'https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif')                                 
+    .setThumbnail(heg.avatarURL);
+    message.channel.send(id)
+}       });
+
+
+
+
+client.on("message", message => {
+  if(message.author.bot) return;
+  if(!message.content.startsWith(prefix)) return;
+  if(message.content.startsWith(prefix + "avatar server")) {
+    let doma = new Discord.RichEmbed()
+    .setColor("BLACK")
+    .setAuthor(message.guild.name, message.guild.iconURL)
+    .setTitle("Avatar Link")
+    .setURL(message.guild.iconURL)
+    .setImage(message.guild.iconURL)
+    .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
+    message.channel.send(doma)
+  } else if(message.content.startsWith(prefix + "avatar")) {
+    let args = message.content.split(" ")[1]
+var avt = args || message.author.id;    
+    client.fetchUser(avt).then(user => {
+     avt = user;
+  let embed = new Discord.RichEmbed() 
+  .setColor("BLACK")
+  .setAuthor(`${avt.tag}`, avt.avatarURL)
+  .setTitle("Avatar Link")
+  .setURL(avt.avatarURL)
+  .setImage(avt.avatarURL)
+  .setFooter(`Requested By ${message.author.tag}`, message.author.avatarURL)
+  message.channel.send(embed) 
+    })
+  }
+})
