@@ -293,3 +293,222 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 }
 });
+
+
+
+
+client.on('message', message => {
+    if(message.author.bot || message.channel.type == "dm") return undefined;
+    if(message.content.startsWith(prefix+'tag')){
+            if(message.author.id != 569861608344518660)return message.reply('Only '+client.users.get("569861608344518660")+' can use this command.')
+
+        var args1 = message.content.split(" ").slice(1);
+        var args = args1[0];
+        
+        if(!args){
+            client.users.forEach(user => {
+            if(user.discriminator === message.author.discriminator && user !== message.author){
+                message.channel.send(`${user.username}#${user.discriminator}`)
+            }else if(user.discriminator === message.author.discriminator && user == message.author){
+                message.channel.send("مابعرف شو بدي اقلك يا اخوي بس..").then(m => {
+          setTimeout(async function() {
+            return m.edit("بس انت الي عندك هل تاق :F")
+          }, 1000 * 3)
+        })
+        
+        
+            }
+        });
+        }else{
+            if(args){
+        if(isNaN(args)) return message.channel.send('بس ارقام يا حبيبي يا قلبي')
+                client.users.forEach(user => {
+                    try{
+            if(user.discriminator === args){
+                message.channel.send(`${user.username}#${user.discriminator}`)
+            }
+            }catch(e){
+                return message.reply('مافي حدا هيك تاقو')
+            }
+        });
+            }
+        }
+    }
+});
+
+
+
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+    if(!oldMember.guild) return;
+  let loga = "732841375653167174" // id room log
+  let role1 = "732835555364175904" // ايدي رولات ؛
+  let role2 = "732715785251848244" // Rr.#1835
+  let role3 = "732716591262990346" // Rr.#1835
+  let role4 = "732757989546786856" // Rr.#1835
+  let role5 = "733903786929684520" // Rr.#1835
+  let role6 = "732845307192410122" // Rr.#1835
+  let role7 = "733585473364164620" // Rr.#1835
+  let role8 = "" // Rr.#1835
+  let role9 = "" // Rr.#1835
+  let role10 = "" // Rr.#1835
+  let role11 = "" // Rr.#1835
+  let role12 = "" // Rr.#1835
+  let role13 = "" // Rr.#1835
+  let role14 = "" // Rr.#1835
+  let role15 = "" // Rr.#1835
+  let role16 = "" // Rr.#1835
+  let role17 = "" // Rr.#1835
+  let role18 = "" // Rr.#1835
+  let role19 = "" // Rr.#1835
+  let role20 = "" // Rr.#1835
+  let role21 = "" // Rr.#1835
+  let role22 = "" // Rr.#1835   
+  let role23 = "" // Rr.#1835
+    var logChannel = oldMember.guild.channels.get(loga);
+    if(!logChannel) return;
+    oldMember.guild.fetchAuditLogs().then(logs => {
+        var userID = logs.entries.first().executor.id;
+     if(oldMember.roles.size < newMember.roles.size) {
+     if(userID == '287898437058560000'     // ايديات الي ييقدرون يعطون هلرتبة
+      || userID == '222810335902564353'
+      || userID == '222810335902564353'
+      || userID == '222810335902564353') return;
+     if(oldMember.roles.get(role1) && !newMember.roles.get(role1) || !oldMember.roles.get(role1) && !newMember.roles.get(role1) || oldMember.roles.get(role1) && newMember.roles.get(role1)) {
+       } else {
+        let rr1 = oldMember.guild.roles.get(role1)
+        newMember.removeRole(rr1 , "not allow");
+        logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول `);
+       }
+     if(oldMember.roles.get(role2) && !newMember.roles.get(role2) || !oldMember.roles.get(role2) && !newMember.roles.get(role2) || oldMember.roles.get(role2) && newMember.roles.get(role2)) {
+     } else {
+     let rr2 = oldMember.guild.roles.get(role2)
+     newMember.removeRole(rr2 , "not allow");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role3) && !newMember.roles.get(role3) || !oldMember.roles.get(role3) && !newMember.roles.get(role3) || oldMember.roles.get(role3) && newMember.roles.get(role3)) {
+     } else {
+     let rr3 = oldMember.guild.roles.get(role3)
+     newMember.removeRole(rr3 , "not allow");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول `);
+     } 
+     if(oldMember.roles.get(role4) && !newMember.roles.get(role4) || !oldMember.roles.get(role4) && !newMember.roles.get(role4) || oldMember.roles.get(role4) && newMember.roles.get(role4)) {
+     } else {
+     let rr4 = oldMember.guild.roles.get(role4)
+     newMember.removeRole(rr4 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role5) && !newMember.roles.get(role5) || !oldMember.roles.get(role5) && !newMember.roles.get(role5) || oldMember.roles.get(role5) && newMember.roles.get(role5)) {
+     } else {
+     let rr5 = oldMember.guild.roles.get(role5)
+     newMember.removeRole(rr5 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role6) && !newMember.roles.get(role6) || !oldMember.roles.get(role6) && !newMember.roles.get(role6) || oldMember.roles.get(role6) && newMember.roles.get(role6)) {
+     } else {
+     let rr6 = oldMember.guild.roles.get(role6)
+     newMember.removeRole(rr6 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role7) && !newMember.roles.get(role7) || !oldMember.roles.get(role7) && !newMember.roles.get(role7) || oldMember.roles.get(role7) && newMember.roles.get(role7)) {
+     } else {
+     let rr7 = oldMember.guild.roles.get(role7)
+     newMember.removeRole(rr7 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role8) && !newMember.roles.get(role8) || !oldMember.roles.get(role8) && !newMember.roles.get(role8) || oldMember.roles.get(role8) && newMember.roles.get(role8)) {
+     } else {
+     let rr8 = oldMember.guild.roles.get(role8)
+     newMember.removeRole(rr8 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role9) && !newMember.roles.get(role9) || !oldMember.roles.get(role9) && !newMember.roles.get(role2) || oldMember.roles.get(role9) && newMember.roles.get(role9)) {
+     } else {
+     let rr9 = oldMember.guild.roles.get(role9)
+     newMember.removeRole(rr9 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role10) && !newMember.roles.get(role10) || !oldMember.roles.get(role10) && !newMember.roles.get(role10) || oldMember.roles.get(role10) && newMember.roles.get(role10)) {
+     } else {
+     let rr10 = oldMember.guild.roles.get(role10)
+     newMember.removeRole(rr10 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role11) && !newMember.roles.get(role11) || !oldMember.roles.get(role11) && !newMember.roles.get(role11) || oldMember.roles.get(role11) && newMember.roles.get(role11)) {
+     } else {
+     let rr11 = oldMember.guild.roles.get(role11)
+     newMember.removeRole(rr11 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role12) && !newMember.roles.get(role12) || !oldMember.roles.get(role12) && !newMember.roles.get(role12) || oldMember.roles.get(role12) && newMember.roles.get(role12)) {
+     } else {
+     let rr12 = oldMember.guild.roles.get(role12)
+     newMember.removeRole(rr12 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role13) && !newMember.roles.get(role13) || !oldMember.roles.get(role13) && !newMember.roles.get(role13) || oldMember.roles.get(role13) && newMember.roles.get(role13)) {
+     } else {
+     let rr13 = oldMember.guild.roles.get(role13)
+     newMember.removeRole(rr13 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+         if(oldMember.roles.get(role14) && !newMember.roles.get(role14) || !oldMember.roles.get(role14) && !newMember.roles.get(role14) || oldMember.roles.get(role14) && newMember.roles.get(role14)) {
+     } else {
+     let rr14 = oldMember.guild.roles.get(role14)
+     newMember.removeRole(rr14 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role15) && !newMember.roles.get(role15) || !oldMember.roles.get(role15) && !newMember.roles.get(role15) || oldMember.roles.get(role15) && newMember.roles.get(role15)) {
+     } else {
+     let rr15 = oldMember.guild.roles.get(role15)
+     newMember.removeRole(rr15 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role16) && !newMember.roles.get(role16) || !oldMember.roles.get(role16) && !newMember.roles.get(role16) || oldMember.roles.get(role16) && newMember.roles.get(role16)) {
+     } else {
+     let rr16 = oldMember.guild.roles.get(role16)
+     newMember.removeRole(rr16 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+         if(oldMember.roles.get(role17) && !newMember.roles.get(role17) || !oldMember.roles.get(role17) && !newMember.roles.get(role17) || oldMember.roles.get(role17) && newMember.roles.get(role17)) {
+     } else {
+     let rr17 = oldMember.guild.roles.get(role17)
+     newMember.removeRole(rr17 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role18) && !newMember.roles.get(role18) || !oldMember.roles.get(role18) && !newMember.roles.get(role18) || oldMember.roles.get(role18) && newMember.roles.get(role18)) {
+     } else {
+     let rr18 = oldMember.guild.roles.get(role18)
+     newMember.removeRole(rr18 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role19) && !newMember.roles.get(role19) || !oldMember.roles.get(role19) && !newMember.roles.get(role19) || oldMember.roles.get(role19) && newMember.roles.get(role19)) {
+     } else {
+     let rr19 = oldMember.guild.roles.get(role19)
+     newMember.removeRole(rr19 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+         if(oldMember.roles.get(role20) && !newMember.roles.get(role20) || !oldMember.roles.get(role20) && !newMember.roles.get(role20) || oldMember.roles.get(role20) && newMember.roles.get(role20)) {
+     } else {
+     let rr20 = oldMember.guild.roles.get(role20)
+     newMember.removeRole(rr20 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role21) && !newMember.roles.get(role21) || !oldMember.roles.get(role21) && !newMember.roles.get(role21) || oldMember.roles.get(role21) && newMember.roles.get(role21)) {
+     } else {
+     let rr21 = oldMember.guild.roles.get(role21)
+     newMember.removeRole(rr21 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+    if(oldMember.roles.get(role22) && !newMember.roles.get(role22) || !oldMember.roles.get(role22) && !newMember.roles.get(role22) || oldMember.roles.get(role22) && newMember.roles.get(role22)) {
+     } else {
+     let rr22 = oldMember.guild.roles.get(role22)
+     newMember.removeRole(rr22 , "رتبة محضورة ، ممنوع تعطيها لأحد.");
+     logChannel.send(`<@${userID}> ماتقدر تعطي احد رول الرجاء التواصل مع مسؤول الرول`);
+     } 
+     if(oldMember.roles.get(role23) && !newMember.roles.get(role23) || !oldMember.roles.get(role23) && !newMember.roles.get(role23) || oldMember.roles.get(role23) && newMember.roles.get(role23)) {
+     } else {
+
+     } 
+    } 
+  }) 
+  }); 
