@@ -632,3 +632,19 @@ if(g.me.voiceChannel && g.me.voiceChannelID !== c.id || !g.me.voiceChannel) c.jo
 console.log('Failed To Join: \n The Channel Type isn "Listening."')
 }
 })
+
+
+
+client.on('message' , async message =>{
+if(message.content.toLowerCase().startsWith(prefix + "مسح")) {
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.sendMessage('لا تمتلك صلاحية MANAGE MESSAGES');
+const mes_count = message.content.split(/ +/).slice(1).shift();
+await message.channel.bulkDelete('99').catch(WoW =>{});
+let embed = new Discord.RichEmbed()
+   .setAuthor(message.author.username)
+   .setColor('#F36E15')
+   .setDescription(`Done, Deleted 99 Messages`)
+   message.channel.send(embed).then(message => {message.delete(5000)})
+  {};
+} //
+});//
