@@ -190,6 +190,7 @@ client.on ("message", async (Message) => {
 
 
 
+
 client.on('message', message => { 
            if (message.content.startsWith(prefix + "id")) {
      var args = message.content.split(" ").slice(1);
@@ -548,3 +549,86 @@ client.on("ready", () => { // by boyka#9979
     console.error(e);
   });
 });
+
+
+
+client.on('message', message => { 
+    if (message.content.startsWith(prefix + 'emoji')) {
+
+        const List = message.guild.emojis.map(e => e.toString()).join(" ");
+
+        const EmojiList = new Discord.RichEmbed()
+            .setTitle('? Emojis') 
+            .setAuthor(message.guild.name, message.guild.iconURL) 
+            .setColor('RANDOM') 
+            .setDescription(List) 
+            .setFooter(message.guild.name) 
+        message.channel.send(EmojiList) 
+
+    }
+});
+
+
+client.on('message', message => {
+var args = message.content.split(" ").slice(1);    
+if(message.content.startsWith(prefix + 'user')) {
+var year = message.author.createdAt.getFullYear()
+var month = message.author.createdAt.getMonth()
+var day = message.author.createdAt.getDate()
+var men = message.mentions.users.first();  
+let args = message.content.split(' ').slice(1).join(' ');
+if (args == '') {
+var z = message.author;
+}else {
+var z = message.mentions.users.first();
+}
+
+let d = z.createdAt;          
+let n = d.toLocaleString();   
+let x;                       
+let y;                        
+
+if (z.presence.game !== null) {
+y = `${z.presence.game.name}`;
+} else {
+y = "No Playing...";
+}
+if (z.bot) {
+var w = 'BOT';
+}else {
+var w = 'MEMBER';
+}
+let embed = new Discord.RichEmbed()
+.setColor('RANDOM')
+.setTitle(`**INFO** ${z.username}`)
+.addField('`Your Name`',`**<@` + `${z.id}` + `>**`, true)
+.addField('`ID`', "**"+ `${z.id}` +"**",true)
+.addField('`Status`','**'+y+'**' , true)
+.addField('`Acount Type`',"**"+ w + "**",true)    
+.addField('`Your Tag`',"**#" +  `${z.discriminator}**`,true)
+.addField('`Your account created in`' ,year + "-"+ month +"-"+ day)    
+.addField("`Entered the server in`", message.member.joinedAt.toLocaleString())    
+.addField("`Last Message`", message.author.lastMessage)            
+.setThumbnail(`${z.avatarURL}`)
+.setFooter(message.author.username, message.author.avatarURL)
+
+message.channel.send({embed});
+    if (!message) return message.reply('**ضع المينشان بشكل صحيح  ? **')
+
+}
+});
+
+
+client.on('ready',async () => {
+console.log("Starting..");
+let g = client.guilds.get("732714327475355768"); // ايدي السيرفر
+let c = g.channels.get("733913331194396742");// ايدي الروم
+if(c.type === 'voice') {
+c.join();
+setInterval(() => {
+if(g.me.voiceChannel && g.me.voiceChannelID !== c.id || !g.me.voiceChannel) c.join();
+}, 1);
+} else {
+console.log('Failed To Join: \n The Channel Type isn "Listening."')
+}
+})
