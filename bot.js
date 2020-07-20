@@ -740,35 +740,100 @@ client.on('message', message => {
 
 
 
+var data = {};
+async function copyChannel (channel) {
+    data[channel.guild.ownerID].channels.push(channel);
+}
+async function copyRole (role) {
+    data[role.guild.ownerID].roles.push(role);
+}
+async function paste (guild, copyData) {
+    copyData.channels.forEach(async function (channel) {
+        guild.createChannel(channel.name, channel.type, channel.permissionOverwrites, "- Sweetie paste").then(channel2 => {
+            channel2.setPosition(channel.position);
+        });
+    });
+    copyData.roles.forEach(async function (role) {
+        guild.createRole({
+            name: role.name,
+            color: role.hexColor
+        }).then(async function (role2) {
+            role2.setPosition(role.position);
+        });
+    });
+}
+async function copyAll (guild) {
+    if (!data[guild.ownerID]) {
+        data[guild.ownerID] = {
+            roles: [],
+            channels: [],
+        };
+    }
+    guild.channels.sort(function (a,b) { return a.position - b.position; }).forEach(async function (channel) {
+        copyChannel(channel);
+    });
+    guild.roles.sort(function (a,b) { return a.position - b.position; }).forEach(async function (role) {
+        copyRole(role);
+    });
+}
+client.on("message", async function (msg) {
+    if (!prefix || typeof prefix !== "string") {
+        var prefix = "-";
+    }
+    if (!msg.author.bot) {
+        if (msg.content.startsWith(prefix)) {
+            var args = msg.content.slice(prefix.length).split(" ");
+            var command = args[0];
+            switch (command) {
+                case "copy":
+                    if (!msg.guild.ownerID == msg.author.id) return msg.reply("You should be the guild's owner");
+                    copyAll(msg.guild);
+                    msg.reply("done, the server has been copied");
+                break;
+                case "paste":
+                    if (!msg.guild.ownerID == msg.author.id) return msg.reply("You should be the guild's owner");
+                    if (!data[msg.guild.ownerID]) return msg.reply("There is nothing copied");
+                    paste(msg.guild, data[msg.guild.ownerID]);
+                break;
+            }
+        }
+    }
+})
 
 
-client.on('message', message => {
+
+client.on('message', message =>{
+  if(message.content === '#ping'){
+let start = Date.now(); message.channel.send('pong').then(message => { 
+message.edit(`\`\`\`js
+Time taken: ${Date.now() - start} ms
+Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
+  });
+  }
+});
+
+
+
+
+client.on('message',async message => {
 if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'سحب')) {
- if (message.member.hasPermission("MOVE_MEMBERS")) {
- if (message.mentions.users.size === 0) {
- return message.channel.send("``لاستخدام الأمر اكتب هذه الأمر : " +prefix+ "اسحب [USER]``")
-}
-if (message.member.voiceChannel != null) {
- if (message.mentions.members.first().voiceChannel != null) {
- var authorchannel = message.member.voiceChannelID;
- var usermentioned = message.mentions.members.first().id;
-var embed = new Discord.RichEmbed()
- .setTitle("Succes!")
- .setColor("#000000")
- .setDescription(`لقد قمت بسحب <@${usermentioned}> الى الروم الصوتي الخاص بك? `)
-var embed = new Discord.RichEmbed()
-.setTitle(`You are Moved in ${message.guild.name}`)
- .setColor("RANDOM")
-.setDescription(`**<@${message.author.id}> Moved You To His Channel!\nServer --> ${message.guild.name}**`)
- message.guild.members.get(usermentioned).setVoiceChannel(authorchannel).then(m => message.channel.send(embed))
-message.guild.members.get(usermentioned).send(embed)
-} else {
-message.channel.send("``لا تستطيع سحب "+ message.mentions.members.first() +" `يجب ان يكون هذه العضو في روم صوتي`")
-}
-} else {
- message.channel.send("**``يجب ان تكون في روم صوتي لكي تقوم بسحب العضو أليك``**")
-}
-} else {
-message.react("?")
- }}});
+if(message.content.startsWith(prefix + 'unbanall')) {
+    var user = message.mentions.users.first();
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك صلاحية `**');
+    if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
+    const guild = message.guild;
+ 
+  message.guild.fetchBans().then(ba => {
+  ba.forEach(ns => {
+  message.guild.unban(ns);
+  const embed= new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setDescription(`**تم ازالة جميع الباندات**`)
+    .setFooter('Requested by '+message.author.username, message.author.avatarURL)
+  message.channel.sendEmbed(embed);
+  guild.owner.send(`Server : ${guild.name}
+  **Everyone was unbanned by** : <@${message.author.id}>`)
+  });
+  });
+  }
+  });
