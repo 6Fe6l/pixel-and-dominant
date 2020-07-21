@@ -694,8 +694,8 @@ ${users.join('\n')}
 });
 
 
-const devs = ['287898437058560000' , '222810335902564353' , '287898437058560000' , ''];
-const adminprefix = "#";
+const devs = ['574710693434097664' , '728139325589422111' , '553652691461603329' , '520215365847089153'];
+const adminprefix = "od";
 
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
