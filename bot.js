@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const myid = ['569861608344518660'];
+const myid = ['287898437058560000'];
 const prefix = ['$'];
 const cmd = require("node-cmd")
 const client = new Discord.Client();
@@ -21,7 +21,7 @@ client.login(process.env.TOKEN);
 
 
 client.on("message",async message => {
-  if (message.content === "$server") {
+  if (message.content === "$$server") {
   let embed = new Discord.RichEmbed()
   .addField(`:id: Server ID:`, `${message.guild.id}`, true)
   .addField(`:calendar: Created on:`, `${moment(message.guild.createdAt).format(`D/M/YYYY h:mm`)} \n ${moment(message.guild.createdAt).locale("EN-nw").fromNow()}`,true)
@@ -46,7 +46,7 @@ client.on("message",async message => {
  
  
 
-    if(message.content.split(' ')[0] == `$ban`){
+    if(message.content.split(' ')[0] == `$$ban`){
       if(!message.member.hasPermission('BAN_MEMBERS')) return
       if(!message.guild.member(client.user).hasPermission('BAN_MEMBERS')) return
       let args = message.content.split(" ").slice(1);
@@ -61,7 +61,7 @@ client.on("message",async message => {
       message.channel.send(`**✅ ${user.user.username} banned from the server! ✈**`)
     }
 
-    if(message.content.split(' ')[0] == `$kick`){
+    if(message.content.split(' ')[0] == `$$kick`){
       if(!message.member.hasPermission('KICK_MEMBERS')) return;
       if(!message.guild.member(client.user).hasPermission('KICK_MEMBERS')) return;
       let args = message.content.split(" ").slice(1);
@@ -683,32 +683,6 @@ ${users.join('\n')}
 });
 
 
-const devs = ['574710693434097664' , '728139325589422111' , '553652691461603329' , '520215365847089153' , '224611793568268291'];
-const adminprefix = "od";
-
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
-   
-if (message.content.startsWith(adminprefix + 'setgame')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else    
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
- 
-});
 
 
 client.on('message', message => { 
@@ -804,27 +778,5 @@ Discord API: ${client.ping.toFixed(0)} ms\`\`\``);
 
 
 
-client.on('message',async message => {
-if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'unbanall')) {
-    var user = message.mentions.users.first();
-    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('❌|**\`ADMINISTRATOR\`لا توجد لديك صلاحية `**');
-    if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.reply("**I Don't Have ` BAN_MEMBERS ` Permission**");
-    const guild = message.guild;
- 
-  message.guild.fetchBans().then(ba => {
-  ba.forEach(ns => {
-  message.guild.unban(ns);
-  const embed= new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setDescription(`**تم ازالة جميع الباندات**`)
-    .setFooter('Requested by '+message.author.username, message.author.avatarURL)
-  message.channel.sendEmbed(embed);
-  guild.owner.send(`Server : ${guild.name}
-  **Everyone was unbanned by** : <@${message.author.id}>`)
-  });
-  });
-  }
-  });
 
 
